@@ -147,7 +147,7 @@ echo "create database roundcubedb; create user 'mailadmin' identified by '$PASS_
 cd /tmp
 wget https://github.com/roundcube/roundcubemail/archive/release-1.3.zip
 unzip release-1.3.zip -d /usr/share/nginx/html
-mv /usr/share/nginx/html/release-1.3/ /usr/share/nginx/html/webmail
+mv /usr/share/nginx/html/roundcubemail-release-1.3 /usr/share/nginx/html/webmail
 chown -R www-data:www-data /usr/share/nginx/html/webmail/*
 chown -R www-data:www-data /usr/share/nginx/html/webmail/
 echo "[======= Input Password Mysql =======]"
