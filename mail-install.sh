@@ -140,22 +140,18 @@ echo "[======= Install Dovecot => $(error_check) =======]"
 
 echo "[======= Install RoundCube =======]"
 
-echo "[======= Install LAMP Server =======]"
-apt-get install lamp-server^ -y
-echo "[======= Install LAMP Server => $(error_check) =======]"
-
 # Create Database for Round Cube  user/pass = mailadmin
 echo "[======= Input Password Mysql =======]"
 echo "create database roundcubedb; create user 'mailadmin' identified by '$PASS_DB_ROUNDCUBE'; grant all privileges on roundcubedb.* to 'mailadmin'; FLUSH PRIVILEGES;" | mysql -u root -p
 
-cd /tmp 
-wget https://github.com/roundcube/roundcubemail/releases/download/1.2.3/roundcubemail-1.2.3-complete.tar.gz
-tar -xzvf roundcubemail-1.2.3-complete.tar.gz -C /var/www/html
-mv /var/www/html/roundcubemail-1.2.3/ /var/www/html/webmail
-chown -R www-data:www-data /var/www/html/webmail/*
-chown -R www-data:www-data /var/www/html/webmail/
+cd /tmp
+wget https://github.com/roundcube/roundcubemail/archive/release-1.3.zip
+unzip release-1.3.zip -d /usr/share/nginx/html
+mv /usr/share/nginx/html/release-1.3/ /usr/share/nginx/html/webmail
+chown -R www-data:www-data /usr/share/nginx/html/webmail/*
+chown -R www-data:www-data /usr/share/nginx/html/webmail/
 echo "[======= Input Password Mysql =======]"
-mysql -u root -p roundcubedb < /var/www/html/webmail/SQL/mysql.initial.sql
+mysql -u root -p roundcubedb < /usr/share/nginx/html/webmail/SQL/mysql.initial.sql
 
 #set host
 echo "127.0.0.1 $DOMAIN" >> /etc/hosts
